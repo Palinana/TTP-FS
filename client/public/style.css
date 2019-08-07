@@ -1,0 +1,125 @@
+/* COLORS 
+
+color-grey-light - #a4b1b5
+color-black - #040d14
+
+color-primary - #4296d2
+color-primary-dark - #2d7ab1
+
+color-success - #21ce99
+color-error - #f45531
+*/
+
+*,
+*::after,
+*::before { 
+    margin: 0;
+    padding: 0;
+    box-sizing: inherit;
+}
+
+body {
+    box-sizing: border-box;
+    font-family: 'Roboto', Helvetica, Arial, sans-serif;
+    font-size: 14px;
+    background: #fff;
+    color: #040d14;
+}
+
+h1, h2, h3, h4, h5, p, a {
+    font-family: 'Roboto', sans-serif;
+}
+
+/*
+    ==========================
+            AUTH PAGE
+    ==========================
+ */
+
+.auth {
+    height: 100vh;
+    width: 100%;
+}
+
+.auth__form {
+    max-width: 100%;
+    width: 380px;
+    padding: 15px;
+    margin: auto;
+}
+
+.auth__form-title {
+    font-weight: 100!important;
+}
+
+.form-control {
+    font-size: 15px;
+    min-height: 48px;
+    font-weight: 400;
+    color: #040d14;
+    background: #fafafa;
+    border: 1px solid #cbcbcd
+
+}
+
+.auth__link {
+    color: #a4b1b5;
+}
+
+.auth__link a {
+    color: #4296d2;
+}
+
+/* color for user input */
+input:not(:placeholder-shown) {
+    color:  #040d14!important;
+}
+
+/* color for placeholders */
+.form-control::-webkit-input-placeholder { color: #040d14; }  /* WebKit, Blink, Edge */
+.form-control:-moz-placeholder { color: #040d14; }  /* Mozilla Firefox 4 to 18 */
+.form-control::-moz-placeholder { color: #040d14;}  /* Mozilla Firefox 19+ */
+.form-control:-ms-input-placeholder { color: #040d14; }  /* Internet Explorer 10-11 */
+.form-control::-ms-input-placeholder { color: #040d14;}  /* Microsoft Edge */
+
+.btn-primary {
+    background: #4296d2;
+    border: none;
+}
+
+.btn-primary:hover,
+.btn-primary:focus,
+.btn-primary:not(:disabled):not(.disabled):active {
+    background: #2d7ab1;
+    outline: none;
+}
+
+.auth__form-error {
+    color: #f45531;
+    font-weight: 300;
+    /* #fbe7e4 */
+}
+
+/*
+    ==========================
+          PORTFOLIO PAGE
+    ==========================
+ */
+
+.navbar-brand {
+    font-size: 15px;
+    color: #040d14; 
+}
+
+.navbar-greeting {
+    font-size: 15px;
+}
+
+.navbar-user {
+    font-size: 15px;
+    color: #4296d2;
+}
+
+.nav-link {
+    color: #040d14; 
+ }

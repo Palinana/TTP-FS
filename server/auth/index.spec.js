@@ -27,7 +27,7 @@ describe('Auth routes', () => {
                 expect(res.body).to.be.an('object')
                 expect(res.body.name).to.equal('Cody');
                 expect(res.body.email).to.equal('cody@test.com');
-                expect(res.body.balance).to.equal(5000);
+                expect(res.body.balance).to.be.equal('5000.00');
             })
         })
 
@@ -58,7 +58,7 @@ describe('Auth routes', () => {
                 expect(res.body).to.be.an('object')
                 expect(res.body.name).to.equal('Cody');
                 expect(res.body.email).to.equal('cody@test.com');
-                expect(res.body.balance).to.equal(5000);
+                expect(res.body.balance).to.be.equal('5000.00');
             })
         })
     

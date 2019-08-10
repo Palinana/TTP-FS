@@ -22,9 +22,9 @@ const User = db.define('user', {
         },
     },
     balance: {
-        type: Sequelize.FLOAT,
+        type: Sequelize.DECIMAL(10,2),
         allowNull: false,
-        defaultValue: 5000.0
+        defaultValue: 5000
     },
     salt: {
         type: Sequelize.STRING,

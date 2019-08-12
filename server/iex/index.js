@@ -1,5 +1,5 @@
-import axios from 'axios';
-import iexApiToken from '../../secrets';
+const axios = require('axios');
+const iexApiToken = require('../../secrets');
 const token = process.env.IEX_API_TOKEN || iexApiToken;
 
 const getSymbolQuote = async tickerSymbol => {

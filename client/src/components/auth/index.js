@@ -1,7 +1,7 @@
 import React from 'react';
 import {connect} from 'react-redux';
 import PropTypes from 'prop-types';
-import { auth } from '../../store';
+import { signup, login } from '../../store/user';
 import AuthLinks from './auth-links';
 
 const AuthForm = props => {
@@ -14,8 +14,7 @@ const AuthForm = props => {
                     <div className="form-group">
                         <input
                             type="name"
-                            id="inputName"
-                            name="name"
+                            name="username"
                             className="form-control form-control-lg font-weight-light"
                             placeholder="Name"
                             required
@@ -28,7 +27,6 @@ const AuthForm = props => {
                 <div className="form-group">
                     <input
                         type="email"
-                        id="inputEmail"
                         name="email"
                         className="form-control form-control-lg font-weight-light"
                         placeholder="Email address"
@@ -40,7 +38,6 @@ const AuthForm = props => {
                 <div className="form-group">
                     <input
                         type="password"
-                        id="inputPassword"
                         name="password"
                         className="form-control form-control-lg font-weight-light"
                         placeholder="Password"
@@ -79,10 +76,17 @@ const mapDispatch = dispatch => {
     return {
       handleSubmit(evt) {
         evt.preventDefault()
-        const formName = evt.target.name
-        const email = evt.target.email.value
-        const password = evt.target.password.value
-        dispatch(auth(email, password, formName))
+        const formName = evt.target.name;
+        const email = evt.target.email.value;
+        const password = evt.target.password.value;
+
+        if(evt.target.name === 'signup') {
+            const username = evt.target.username.value;
+            dispatch(signup(username, email, password, formName))
+        }
+        else {
+            dispatch(login(email, password, formName))
+        }
       }
     }
 }

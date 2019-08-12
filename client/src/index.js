@@ -9,7 +9,7 @@ import Routes from './routes';
 ReactDOM.render(
     <Provider store={store}>
         <Router history={history}>
-        <Routes />
+            <Routes />
         </Router>
     </Provider>,
 document.getElementById('root'));   

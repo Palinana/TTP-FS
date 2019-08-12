@@ -1,5 +1,6 @@
 import React from 'react';
 import Portfolio from './portfolio';
+import PurchaseStock from './purchaseStock'
 
 const PortfolioDashboard = props => {
     return (
@@ -10,7 +11,7 @@ const PortfolioDashboard = props => {
                 </div>
 
                 <div className="col-md-4 pl-md-5 mt-5">
-                    Purchase Stocks
+                    <PurchaseStock/>
                 </div>
             </div>
         </div>

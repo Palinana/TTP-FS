@@ -26,15 +26,36 @@ router.post('/', async (req, res, next) => {
                 user.balance -= quantity * latestPrice;
                 await user.save();
 
-                //Create a transaction for user's transaction history
-                const transaction = await Transaction.create({
+                // getting stock data to check if has already bought the stock 
+                const userExistingStock = await Transaction.findOne({ where: {
                     ticker,
-                    quantity,
-                    price: latestPrice, 
-                }); 
+                    userId: req.user.id
+                }});
 
-                transaction.setUser(user);
-                res.json(transaction);
+                // uncrement stock quanitity
+                if (userExistingStock) {
+                    const userStock = await Transaction.update(
+                        {
+                            quantity: Number(userExistingStock.quantity) + Number(quantity)
+                        },
+                        { where: {
+                            ticker,
+                            userId: req.user.id
+                        }
+                    });
+                    res.json(userStock)
+                }
+                else { 
+                    //Create a transaction for user's transaction history
+                    const transaction = await Transaction.create({
+                        ticker,
+                        quantity,
+                        price: latestPrice, 
+                    }); 
+                    transaction.setUser(user);
+                    res.json(transaction);
+                }
+                
             }
         }
         else {

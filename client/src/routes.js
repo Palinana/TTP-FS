@@ -50,7 +50,7 @@ const mapDispatch = dispatch => {
         loadInitialData() {
             dispatch(me());
         },
-  };
+    };
 };
 
 export default withRouter(connect(mapState, mapDispatch)(Routes));

@@ -130,7 +130,8 @@ input:not(:placeholder-shown) {
 .portfolio {
     border-right: 1px solid #bfbebe;
 } 
-.portfolio__title, .purchase__title, {
+
+.portfolio__title, .purchase__title {
     font-size: 20px;
     font-weight: 300;
 }
@@ -153,10 +154,22 @@ td span {
     font-size: 15px;
 }
 
-
 .form-error {
     color: #f45531;
     font-weight: 300;
     margin-bottom: 20px;
     text-align: center;
+}
+
+/*
+    ==========================
+          MEDIA QUERIES
+    ==========================
+ */
+
+/* Small devices (landscape phones and up) */
+@media only screen and (min-width : 576px) and (max-width:768px){
+    .portfolio {
+        border-right: none;
+    }
 }

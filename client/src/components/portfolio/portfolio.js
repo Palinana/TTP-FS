@@ -1,63 +1,21 @@
-import React, { Component } from 'react';
-import { connect } from 'react-redux';
-import { fetchStocks } from "../../store";
-
+import React from 'react';
 import PortfolioTable from './portfolioTable';
 
-class Portfolio extends Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-            totalPortfolioValue: 0,
-        };
-    }
-
-    componentDidMount() {
-        const { userId } = this.props;
-        this.props.getStocks(userId);
-    }
-
-    calculatePortfolioValue() { 
-
-    }
-
-    render() {
-        const { stocks } = this.props;
-
-        if(stocks){
-            return (
-                <div className="row">
-                    <div className="col-12 d-flex">
-                        <div className="portfolio__title mr-auto">Portfolio</div>
-                        <h2 className="portfolio__money text-right">$5000.00</h2>
-                    </div>
-                    { stocks.length ? 
-                        <PortfolioTable stocks={stocks}/> 
-                        : 
-                        <div className="col-12 d-flex">
-                            <div className="m-auto">You don't have any stocks yet</div>
-                        </div>
-                    }
+const Portfolio = ({ stocks }) => {
+    if(stocks){
+        return (
+            <div className="row">
+                <div className="col-12 d-flex">
+                    <div className="portfolio__title mr-auto">Portfolio</div>
+                    <h2 className="portfolio__money text-right">$5000.00</h2>
                 </div>
-            )
-        }
-        else {
-            return <p>Loading...</p>
-        }
+                    <PortfolioTable stocks={stocks}/> 
+            </div>
+        )
     }
-}
-  
-const mapState = state => {
-    console.log('state ', state)
-    return {
-      stocks: state.portfolio.stocks,
-      userId: state.user.id,
-      name: state.user.name
-    };
+    else {
+        return <p>Loading...</p>
+    }
 };
-
-const mapDispatch = dispatch => ({
-    getStocks: (id) => dispatch(fetchStocks(id)),
-});
-
-export default connect(mapState, mapDispatch)(Portfolio);
+  
+export default Portfolio;

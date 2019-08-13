@@ -1,21 +1,85 @@
-import React from 'react';
+import React, { Component } from 'react';
+import { connect } from 'react-redux';
+
+import { fetchStocks, purchaseStock } from "../../store";
+import { fetchTransactions } from '../../store';
+
 import Portfolio from './portfolio';
-import PurchaseStock from './purchaseStock'
+import PurchaseStock from './purchaseStock';
 
-const PortfolioDashboard = props => {
-    return (
-        <div className="container">
-            <div className="row">
-                <div className="portfolio col-md-8 pr-md-5 mt-5">
-                    <Portfolio/>
-                </div>
+class PortfolioDashboard extends Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            totalPortfolioValue: 0,
+            ticker: '',
+            quantity: ''
+        };
+    }
 
-                <div className="col-md-4 pl-md-5 mt-5">
-                    <PurchaseStock/>
+    componentDidMount() {
+        const { userId } = this.props;
+        this.props.getStocks(userId);
+        this.props.getTransactions(userId);
+    }
+
+    handleChange = e => this.setState({ [e.target.name]: e.target.value });
+    
+    handleSubmit = e => {
+        e.preventDefault();
+        const { ticker, quantity } = this.state;
+        const userStock = { ticker, quantity, id: this.props.userId}
+        this.props.buyStock(userStock);
+        this.setState({ ticker: '', quantity: '' });
+    }
+
+    render() {
+        const { stocks, error } = this.props;
+        stocks.sort((a, b) => a.ticker !== b.ticker ? a.ticker < b.ticker ? -1 : 1 : 0);
+
+        if(stocks){
+            return (
+                <div className="container">
+                    <div className="row">
+                        <div className="portfolio col-md-8 pr-md-5 mt-5">
+                            <Portfolio stocks={stocks}/>
+                        </div>
+
+                        <div className="col-md-4 pl-md-5 mt-5">
+                            <PurchaseStock 
+                                handleSubmit={this.handleSubmit} 
+                                onChange={this.handleChange}
+                                tickerValue={this.state.ticker}
+                                quantityValue={this.state.quantity}
+                                error={error}
+                            />
+                        </div>
+                    </div>
                 </div>
-            </div>
-        </div>
-    );
+            )    
+        }
+        else {
+            return <p>Loading...</p>
+        }
+    }
 };
   
-export default PortfolioDashboard;
+const mapState = (state,ownProps) => {
+    console.log('state ', state)
+    return {
+      stocks: state.portfolio.stocks,
+      userId: state.user.id,
+      name: state.user.name,
+      error: state.transactions.error,
+    };
+};
+
+const mapDispatch = dispatch => ({
+    getStocks: (id) => dispatch(fetchStocks(id)),
+    buyStock: (ticker, quantity, id) => {
+        dispatch(purchaseStock(ticker, quantity, id))
+    },
+    getTransactions: (id) => dispatch(fetchTransactions(id))
+});
+
+export default connect(mapState, mapDispatch)(PortfolioDashboard);

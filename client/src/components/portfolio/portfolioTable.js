@@ -7,8 +7,8 @@ const PortfolioTable = ({ stocks }) => {
             <table className="table">
                 <tbody>
                     { stocks ? (
-                        stocks.map(stock => (
-                            <PortfolioTableItem stock={stock}/>
+                        stocks.map((stock, idx) => (
+                            <PortfolioTableItem stock={stock} key={idx}/>
                         ))
                         ) : (
                         <p>Loading...</p>

@@ -6,24 +6,24 @@ const { getSymbolQuote } = require('../iex');
 router.post('/', async (req, res, next) => {
     try {
         if (req.user) {
-            const ticker = req.body.ticker.toUpperCase();
+            const ticker = req.body.ticker.toLowerCase();
             const quantity = req.body.quantity;
 
             // Getting the current ticker price 
-            const { latestPrice } = await getSymbolQuote(ticker);
-            console.log('latestPrice ---> ', latestPrice)
+            const tickerData  = await getSymbolQuote(ticker);
+            // console.log('tickerData ---> ', tickerData)
 
             // If invalid symbol  
-            if (latestPrice === 'Unknown symbol') throw new Error('Unknown ticker symbol! Try again.');
+            if (tickerData === 'Unknown symbol') throw new Error('Unknown ticker symbol');
 
             // Verifing if a user has enough balance to purchase a stock
             const user = await User.findById(req.user.id);
-            if (user.balance < numberOfShares * latestPrice * 100) {
-                res.status(304).send("You don't have enough money to purchase a stock!");
-            }
+            const latestPrice = tickerData.latestPrice;
+
+            if (user.balance < quantity * latestPrice) throw new Error('Not enough money');
             else {
                 // Update user balance in the Users table
-                user.balance -= numberOfShares * latestPrice * 100;
+                user.balance -= quantity * latestPrice;
                 await user.save();
 
                 //Create a transaction for user's transaction history
@@ -32,18 +32,27 @@ router.post('/', async (req, res, next) => {
                     quantity,
                     price: latestPrice, 
                 }); 
-                transaction.setUser(user);
 
-                res.status(201).send('Successfully purchased!');
+                transaction.setUser(user);
+                res.json(transaction);
             }
         }
         else {
             res.send('You must be signed in to make a purchase');
         }
-    } catch (error) {
-        next(error);
+    } 
+    catch (error) {
+        let errorMessage = error.message;
+        if (errorMessage === 'Not enough money') {
+            res.status(402).send("You don't have enough money to purchase a stock!")
+        } 
+        else if(errorMessage === 'Unknown ticker symbol') {
+            res.status(404).send('Unknown ticker symbol! Try again.');
+        } 
+        else {
+            next(error);
+        }
     }
 });
-
 
 module.exports = router;

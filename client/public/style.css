@@ -152,3 +152,11 @@ tbody tr:first-child > td{
 td span {
     font-size: 15px;
 }
+
+
+.form-error {
+    color: #f45531;
+    font-weight: 300;
+    margin-bottom: 20px;
+    text-align: center;
+}

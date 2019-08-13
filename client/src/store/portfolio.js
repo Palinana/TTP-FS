@@ -11,17 +11,12 @@ const getStocks = stocks => ({
     stocks,
 });
 
-export const fetchStocks = userId => {
-    return dispatch => {
-        axios
-          .get(`api/users/${userId}/portfolio`)
-          .then(res => {
-            return res.data
-          })
-          .then(stocks => {
-            dispatch(getStocks(stocks))
-          })
-          .catch(console.error)
+export const fetchStocks = userId => async dispatch => {
+    try {
+        const { data } = await axios.get(`api/users/${userId}/portfolio`)
+        dispatch(getStocks(data))
+    } catch (error) {
+        console.error(error)
     }
 };
 

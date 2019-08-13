@@ -48,9 +48,9 @@ const mapState = state => {
 const mapDispatch = dispatch => {
     return {
         loadInitialData() {
-        dispatch(me());
+            dispatch(me());
         },
-  };
+    };
 };
 
 export default withRouter(connect(mapState, mapDispatch)(Routes));

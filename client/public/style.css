@@ -104,8 +104,9 @@ input:not(:placeholder-shown) {
     ==========================
           PORTFOLIO PAGE
     ==========================
- */
+*/
 
+/*  NAVBAR  */
 .navbar-brand {
     font-size: 15px;
     color: #040d14; 
@@ -122,4 +123,53 @@ input:not(:placeholder-shown) {
 
 .nav-link {
     color: #040d14; 
- }
+}
+
+
+/*  PORTFOLIO SECTION  */
+.portfolio {
+    border-right: 1px solid #bfbebe;
+} 
+
+.portfolio__title, .purchase__title {
+    font-size: 20px;
+    font-weight: 300;
+}
+
+.portfolio__money {
+    font-weight: 300;
+    font-size: 35px;
+    color: #4296d2;
+}
+
+.stock__shares {
+    color: #babdbf;
+}
+
+tbody tr:first-child > td{
+    border-top: none;
+}
+
+td span {
+    font-size: 15px;
+}
+
+.form-error {
+    color: #f45531;
+    font-weight: 300;
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+/*
+    ==========================
+          MEDIA QUERIES
+    ==========================
+ */
+
+/* Small devices (landscape phones and up) */
+@media only screen and (min-width : 576px) and (max-width:768px){
+    .portfolio {
+        border-right: none;
+    }
+}

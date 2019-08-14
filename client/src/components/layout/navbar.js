@@ -14,12 +14,15 @@ class Navbar extends Component {
             <nav className="navbar navbar-expand-md navbar-fixed mb-4">
                 {isLoggedIn ? (
                     <div className="container-fluid">
-                        <Link to="/portfolio" class="navbar-brand">
+                        <Link to="/portfolio" className="navbar-brand">
                             <img className="nav-logo" src={logo}/>
                         </Link>
                         <ul className="nav navbar-nav">
                             <li className="nav-item">
                                 <Link to="/portfolio" className="nav-link">Portfolio</Link>
+                            </li>
+                            <li className="nav-item">
+                                <Link to="/transactions" className="nav-link">Transactions</Link>
                             </li>
                             <li className="nav-item">
                                 <Link to="#" className="nav-link" onClick={handleClick}>

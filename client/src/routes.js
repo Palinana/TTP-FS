@@ -5,6 +5,7 @@ import { withRouter, Route, Switch, Redirect } from 'react-router-dom';
 import { Login, Signup } from './components/auth';
 import Portfolio from './components/portfolio';
 import Navbar from './components/layout/navbar';
+import Transactions from './components/transactions'
 
 import { me } from './store';
 
@@ -28,6 +29,10 @@ class Routes extends Component {
                             <Route
                                 exact path="/portfolio"
                                 render={() => <Portfolio {...this.props} />}
+                            />
+                            <Route
+                                exact path="/transactions"
+                                render={() => <Transactions {...this.props} />}
                             />
                         </Switch>
                     )}

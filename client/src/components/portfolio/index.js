@@ -2,8 +2,9 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
 import { fetchStocks, purchaseStock } from "../../store";
-import { fetchTransactions } from '../../store';
+import { fetchError } from '../../store';
 
+import UserPanel from './userPanel';
 import Portfolio from './portfolio';
 import PurchaseStock from './purchaseStock';
 
@@ -20,7 +21,7 @@ class PortfolioDashboard extends Component {
     componentDidMount() {
         const { userId } = this.props;
         this.props.getStocks(userId);
-        this.props.getTransactions(userId);
+        this.props.getError("");
     }
 
     handleChange = e => this.setState({ [e.target.name]: e.target.value });
@@ -33,14 +34,24 @@ class PortfolioDashboard extends Component {
         this.setState({ ticker: '', quantity: '' });
     }
 
+    getDate = () => {
+        const days = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
+        let weekDay = days[new Date().getDay()];
+        let date = `${new Date().toString().slice(4,10)}, ${new Date().toString().slice(11,15)}`
+        return { weekDay, date}
+    }
+    
     render() {
-        const { stocks, error } = this.props;
+        const { user, stocks, error } = this.props;
         stocks.sort((a, b) => a.ticker !== b.ticker ? a.ticker < b.ticker ? -1 : 1 : 0);
 
         if(stocks){
             return (
                 <div className="container">
                     <div className="row">
+                        <div className="col-12 mt-5 mb-5 mb-md-0">
+                            <UserPanel user={user} weekDay={this.getDate().weekDay} date={this.getDate().date}/>
+                        </div>
                         <div className="portfolio col-md-8 pr-md-5 mt-5">
                             <Portfolio stocks={stocks}/>
                         </div>
@@ -69,8 +80,8 @@ const mapState = (state,ownProps) => {
     return {
       stocks: state.portfolio.stocks,
       userId: state.user.id,
-      name: state.user.name,
-      error: state.transactions.error,
+      user: state.user,
+      error: state.error.error,
     };
 };
 
@@ -79,7 +90,7 @@ const mapDispatch = dispatch => ({
     buyStock: (ticker, quantity, id) => {
         dispatch(purchaseStock(ticker, quantity, id))
     },
-    getTransactions: (id) => dispatch(fetchTransactions(id))
+    getError: (data) => dispatch(fetchError(data))
 });
 
 export default connect(mapState, mapDispatch)(PortfolioDashboard);

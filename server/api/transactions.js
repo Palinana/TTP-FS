@@ -65,7 +65,7 @@ router.post('/', async (req, res, next) => {
     catch (error) {
         let errorMessage = error.message;
         if (errorMessage === 'Not enough money') {
-            res.status(402).send("You don't have enough money to purchase a stock!")
+            res.status(400).send("You don't have enough money to purchase a stock!")
         } 
         else if(errorMessage === 'Unknown ticker symbol') {
             res.status(404).send('Unknown ticker symbol! Try again.');

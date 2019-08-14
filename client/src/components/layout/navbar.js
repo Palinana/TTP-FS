@@ -1,56 +1,59 @@
-import React from 'react';
+import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 
+import exit from '../../icons/exit.png';
+import logo from '../../icons/logo.png';
 import { logout } from '../../store';
 
-const Navbar = ({ handleClick, isLoggedIn, userName }) => {
-    if (!isLoggedIn) return null
-    else {
+class Navbar extends Component {
+    render() {
+        const { handleClick, isLoggedIn } = this.props;
         return (
             <nav className="navbar navbar-expand-md navbar-fixed mb-4">
-                <div className="container">
-                    {isLoggedIn ? <div className="navbar-greeting">Hi, <span className="navbar-user">{userName}</span></div> : null}
-                    {isLoggedIn ? (
-                        <ul className="navbar-nav ml-auto">
+                {isLoggedIn ? (
+                    <div className="container-fluid">
+                        <Link to="/portfolio" class="navbar-brand">
+                            <img className="nav-logo" src={logo}/>
+                        </Link>
+                        <ul className="nav navbar-nav">
                             <li className="nav-item">
                                 <Link to="/portfolio" className="nav-link">Portfolio</Link>
                             </li>
                             <li className="nav-item">
                                 <Link to="#" className="nav-link" onClick={handleClick}>
-                                    Logout
+                                    <img className="nav-exit" src={exit}/>
                                 </Link>
                             </li>
                         </ul>
-                        ) : (
-                        <ul className="navbar-nav ml-auto">
-                            <li className="nav-item">
-                                <Link to="/login" className="nav-link">Login</Link>
-                                </li>
-                            <li className="nav-item">
-                                <Link to="/signup" className="nav-link">Sign Up</Link>
-                            </li>
-                        </ul>
-                    )}
-                </div>
+                    </div>
+                ) : (
+                    null
+                )}
             </nav>
-        )
-    }    
+        )   
+    }
 }
-  
+
+const mapState = state => {
+    return {
+        isLoggedIn: !!state.user.id,
+    }
+}
+
 const mapDispatch = dispatch => {
     return {
         handleClick() {
             dispatch(logout())
-       }
+        }
     }
 }
   
-export default connect(null, mapDispatch)(Navbar);
+export default connect(mapState, mapDispatch)(Navbar);
   
-
 Navbar.propTypes = {
     handleClick: PropTypes.func.isRequired,
-    isLoggedIn: PropTypes.bool.isRequired
+    isLoggedIn: PropTypes.bool.isRequired,
 }
+

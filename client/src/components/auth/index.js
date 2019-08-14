@@ -2,7 +2,7 @@ import React from 'react';
 import {connect} from 'react-redux';
 import PropTypes from 'prop-types';
 import { signup, login } from '../../store/user';
-import AuthLinks from './auth-links';
+import AuthLinks from './authLinks';
 
 const AuthForm = props => {
     const { name, displayName, handleSubmit, error } = props;

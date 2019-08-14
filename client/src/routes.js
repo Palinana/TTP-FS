@@ -41,7 +41,7 @@ const mapState = state => {
     return {
         isLoggedIn: !!state.user.id,
         userId: state.user.id,
-        userName: state.user.name 
+        user: state.user 
     };
 };
 

@@ -1,21 +1,13 @@
 import axios from 'axios';
-import { fetchStocks } from "./index";
+import { fetchStocks, me, fetchError } from "./index";
 
 const initialState = {
     transactions: [],
-    error: ''
 }
 
 const GET_TRANSACTIONS = 'GET_TRANSACTIONS';
 
 const BUY_STOCK = 'BUY_STOCK';
-
-const GET_ERROR = 'GET_ERROR';
-
-const getError = error => ({
-    type: GET_ERROR,
-    error,
-});
 
 const getTransactions = transactions => ({
     type: GET_TRANSACTIONS,
@@ -43,12 +35,13 @@ export const purchaseStock = transactionData => async dispatch => {
         res = await axios.post('api/transactions', transactionData);
     } catch (error) {
         // in case if there is an error with user input, the error message will be sent and placed under transactions -> error
-        return dispatch(getError( error.response.data ));
+        return dispatch(fetchError( error.response.data ));
     }
     // otherwise, a new transaction will be placed
     try {
         dispatch(buyStock(res.data));
         dispatch(fetchStocks(transactionData.id))
+        dispatch(me())
       } catch (error) {
         console.error(error);
     }
@@ -64,12 +57,11 @@ export default function(state = initialState, action) {
                 ...state,
                 transactions: [...state.transactions, action.transaction],
             };
-        case GET_ERROR:
-            return { ...state, error: action.error};
         default:
             return state;
     }
 }
+
 
   
   

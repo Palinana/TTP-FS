@@ -3,8 +3,9 @@
 color-grey-light - #a4b1b5
 color-black - #040d14
 
-color-primary - #4296d2
-color-primary-dark - #2d7ab1
+color-primary-light - #edf7fb;
+color-primary - #5fc0e7
+color-primary-dark - #c5cfd6
 
 color-success - #21ce99
 color-error - #f45531
@@ -67,7 +68,7 @@ h1, h2, h3, h4, h5, p, a {
 }
 
 .auth__link a {
-    color: #4296d2;
+    color: #5fc0e7;
 }
 
 /* color for user input */
@@ -83,14 +84,14 @@ input:not(:placeholder-shown) {
 .form-control::-ms-input-placeholder { color: #040d14;}  /* Microsoft Edge */
 
 .btn-primary {
-    background: #4296d2;
+    background: #5fc0e7;
     border: none;
 }
 
 .btn-primary:hover,
 .btn-primary:focus,
 .btn-primary:not(:disabled):not(.disabled):active {
-    background: #2d7ab1;
+    background: #c5cfd6;
     outline: none;
 }
 
@@ -112,17 +113,49 @@ input:not(:placeholder-shown) {
     color: #040d14; 
 }
 
-.navbar-greeting {
-    font-size: 15px;
+.nav-logo {
+    width: 45px;
+}
+
+.nav-exit {
+    width: 20px;
 }
 
 .navbar-user {
     font-size: 15px;
-    color: #4296d2;
+    color: #5fc0e7;
 }
 
 .nav-link {
     color: #040d14; 
+}
+
+
+/*  USER PANEL  */
+.user-panel {
+    padding: 20px;
+    background: #edf7fb;
+    border-radius: 5px;
+}
+
+.user-panel__weekday, .user-panel__username {
+    font-size: 30px;
+    font-weight: 200;
+}
+
+.user-panel__date {
+    font-size: 15px;
+    font-weight: 200;
+}
+
+.user-panel__balance-title {
+    color: #a4b1b5;
+}
+
+.user-panel__balance {
+    font-size: 40px;
+    font-weight: 300;
+    color: #5fc0e7;
 }
 
 
@@ -138,8 +171,7 @@ input:not(:placeholder-shown) {
 
 .portfolio__money {
     font-weight: 300;
-    font-size: 35px;
-    color: #4296d2;
+    font-size: 25px;
 }
 
 .stock__shares {

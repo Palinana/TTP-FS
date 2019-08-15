@@ -1,8 +1,8 @@
 import axios from 'axios';
-import { fetchStocks, me, fetchError } from "./index";
+import { fetchStocks, me, fetchError, fetchSuccess } from "./index";
 
 const initialState = {
-    transactions: [],
+    transactions: []
 }
 
 const GET_TRANSACTIONS = 'GET_TRANSACTIONS';
@@ -18,7 +18,6 @@ const buyStock = transaction => ({
     type: BUY_STOCK,
     transaction,
 });
-
 
 export const fetchTransactions = userId => async dispatch => {
     try {
@@ -40,8 +39,13 @@ export const purchaseStock = transactionData => async dispatch => {
     // otherwise, a new transaction will be placed
     try {
         dispatch(buyStock(res.data));
-        dispatch(fetchStocks(transactionData.id))
-        dispatch(me())
+        dispatch(fetchStocks(transactionData.id)) //updating stocks data
+        dispatch(fetchTransactions(transactionData.id)) //updating transactions data
+        dispatch(me()) //updating user data(balance)
+        console.log('res.data ', transactionData)
+        dispatch(fetchSuccess(`You successfully purchased  ${transactionData.quantity} ${transactionData.quantity > 1 ? 'shares' : 'share'} of ${transactionData.ticker.toUpperCase()}!`)) 
+
+        // dispatch(fetchSuccess('Successfully purchased!')) 
       } catch (error) {
         console.error(error);
     }

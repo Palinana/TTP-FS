@@ -1,13 +1,13 @@
 const initialState = {
-    error: ''
+    errorMessage: ''
 }
 
 
 const GET_ERROR = 'GET_ERROR';
 
-const getError = error => ({
+const getError = errorMessage => ({
     type: GET_ERROR,
-    error,
+    errorMessage,
 });
 
 export const fetchError = (data) => async dispatch => {
@@ -22,7 +22,7 @@ export const fetchError = (data) => async dispatch => {
 export default function(state = initialState, action) {
     switch (action.type) {
         case GET_ERROR:
-            return { ...state, error: action.error};
+            return { ...state, errorMessage: action.errorMessage};
         default:
             return state;
     }

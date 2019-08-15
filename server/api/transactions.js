@@ -6,6 +6,7 @@ const { getSymbolQuote } = require('../iex');
 router.post('/', async (req, res, next) => {
     try {
         if (req.user) {
+            const type = req.body.type;
             const ticker = req.body.ticker.toLowerCase();
             const quantity = req.body.quantity;
 
@@ -48,6 +49,7 @@ router.post('/', async (req, res, next) => {
                 else { 
                     //Create a transaction for user's transaction history
                     const transaction = await Transaction.create({
+                        type,
                         ticker,
                         quantity,
                         price: latestPrice, 

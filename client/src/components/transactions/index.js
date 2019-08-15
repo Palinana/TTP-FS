@@ -14,9 +14,11 @@ class Transactions extends Component {
 
     // changing the date format that comes from the DB
     purchaseDate = (date) => {
+        console.log(date)
         const month = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
         let weekmonth = month[new Date().getMonth()];
 
+        console.log(`${weekmonth} ${ Number(date.slice(8)[0]) === 0 ? date.slice(9) : date.slice(8) }, ${date.slice(0,4)}`)
         return `${weekmonth} ${ Number(date.slice(8)[0]) === 0 ? date.slice(9) : date.slice(8) }, ${date.slice(0,4)}`;
     }
 
@@ -34,12 +36,12 @@ class Transactions extends Component {
                         <table className="table">
                             <thead className="transactions__table-heading thead-inverse">
                                 <tr>
-                                    <th class="text-center">Type</th>
-                                    <th class="text-center">Symbol</th>
-                                    <th class="text-center">Quantity</th>
-                                    <th class="text-center">Unit Price</th>
-                                    <th class="text-center">Total</th>
-                                    <th class="text-center">Purchase Date</th>
+                                    <th className="text-center">Type</th>
+                                    <th className="text-center">Symbol</th>
+                                    <th className="text-center">Quantity</th>
+                                    <th className="text-center">Unit Price</th>
+                                    <th className="text-center">Total</th>
+                                    <th className="text-center">Purchase Date</th>
                                 </tr>
                             </thead>
                             <tbody>

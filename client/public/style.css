@@ -178,9 +178,9 @@ a:hover {
     font-size: 25px;
 }
 
-.stock__shares {
+/* .stock__shares {
     color: #babdbf;
-}
+} */
 
 tbody tr:first-child > td{
     border-top: none;
@@ -195,6 +195,19 @@ td span {
     font-weight: 300;
     margin-bottom: 20px;
     text-align: center;
+    background: #fbeded;
+    border-radius: 5px;
+    padding: 15px;
+}
+
+.form-success {
+    color: #41bd86;
+    font-weight: 300;
+    margin-bottom: 20px;
+    text-align: center;
+    background: #edfbef;
+    border-radius: 5px;
+    padding: 15px;
 }
 
 
@@ -203,16 +216,17 @@ td span {
         TRANSACTIONS PAGE
     ==========================
  */
- .transactions__table-heading {
+ .transactions__table-heading, .portfolio__table-heading {
     background: #fafafa; 
     /* Color for table head and should also be the input color  */
 }
 
-.transactions__table-heading  tr:first-child > th{
+.transactions__table-heading  tr:first-child > th,
+.portfolio__table-heading tr:first-child > th{
     border: none;
 }
 
-.transaction__quantity, .transaction__total, .transaction__type {
+.transaction__quantity, .transaction__total, .transaction__type, .stock__shares {
     font-weight: 100;
 }
 

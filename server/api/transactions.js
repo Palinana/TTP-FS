@@ -29,6 +29,7 @@ router.post('/', async (req, res, next) => {
 
                 // getting stock data to check if has already bought the stock 
                 const userExistingStock = await Transaction.findOne({ where: {
+                    type,
                     ticker,
                     userId: req.user.id
                 }});
@@ -67,7 +68,7 @@ router.post('/', async (req, res, next) => {
     catch (error) {
         let errorMessage = error.message;
         if (errorMessage === 'Not enough money') {
-            res.status(400).send("You don't have enough money to purchase a stock!")
+            res.status(400).send("You don't have enough money to purchase this stock!")
         } 
         else if(errorMessage === 'Unknown ticker symbol') {
             res.status(404).send('Unknown ticker symbol! Try again.');

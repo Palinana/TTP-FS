@@ -130,6 +130,10 @@ input:not(:placeholder-shown) {
     color: #040d14; 
 }
 
+a:hover {
+    color: #5fc0e7;
+}
+
 
 /*  USER PANEL  */
 .user-panel {
@@ -164,7 +168,7 @@ input:not(:placeholder-shown) {
     border-right: 1px solid #bfbebe;
 } 
 
-.portfolio__title, .purchase__title {
+.portfolio__title, .purchase__title, .transactions__title {
     font-size: 20px;
     font-weight: 300;
 }
@@ -192,6 +196,27 @@ td span {
     margin-bottom: 20px;
     text-align: center;
 }
+
+
+/*
+    ==========================
+        TRANSACTIONS PAGE
+    ==========================
+ */
+ .transactions__table-heading {
+    background: #fafafa; 
+    /* Color for table head and should also be the input color  */
+}
+
+.transactions__table-heading  tr:first-child > th{
+    border: none;
+}
+
+.transaction__quantity, .transaction__total, .transaction__type {
+    font-weight: 100;
+}
+
+
 
 /*
     ==========================

@@ -1,8 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
-import { fetchStocks, purchaseStock } from "../../store";
-import { fetchError } from '../../store';
+import { fetchStocks, purchaseStock, fetchError } from "../../store";
 
 import UserPanel from './userPanel';
 import Portfolio from './portfolio';
@@ -29,7 +28,7 @@ class PortfolioDashboard extends Component {
     handleSubmit = e => {
         e.preventDefault();
         const { ticker, quantity } = this.state;
-        const userStock = { ticker, quantity, id: this.props.userId}
+        const userStock = { ticker, quantity, id: this.props.userId, type: 'buy'}
         this.props.buyStock(userStock);
         this.setState({ ticker: '', quantity: '' });
     }

@@ -18,25 +18,25 @@ describe('Auth routes', () => {
             return request(app)
             .post('/auth/signup')
             .send({
-                name: 'Cody',
+                username: 'Cody',
                 email: 'cody@test.com',
                 password: 'test'
               })
             .expect(200)
             .then(res => {
                 expect(res.body).to.be.an('object')
-                expect(res.body.name).to.equal('Cody');
+                expect(res.body.username).to.equal('Cody');
                 expect(res.body.email).to.equal('cody@test.com');
                 expect(res.body.balance).to.be.equal('5000.00');
             })
         })
 
         // This one should fail with a 409 as user already exists
-        it('does not create a new article without content', () => {
+        it('does not create a new user with the same email', () => {
             return request(app)
             .post('/auth/signup')
             .send({
-                name: 'Cody',
+                username: 'Cody',
                 email: 'cody@test.com',
                 password: 'test'
             })
@@ -49,25 +49,25 @@ describe('Auth routes', () => {
             return request(app)
             .post('/auth/login')
             .send({
-                name: 'Cody',
+                username: 'Cody',
                 email: 'cody@test.com',
                 password: 'test'
               })
             .expect(200)
             .then(res => {
                 expect(res.body).to.be.an('object')
-                expect(res.body.name).to.equal('Cody');
+                expect(res.body.username).to.equal('Cody');
                 expect(res.body.email).to.equal('cody@test.com');
                 expect(res.body.balance).to.be.equal('5000.00');
             })
         })
     
         // This one should fail with a 404 as user is not found
-        it('does not create a new article without content', () => {
+        it('does not login a user without content', () => {
             return request(app)
             .post('/auth/login')
             .send({
-                name: '',
+                username: '',
                 email: '',
                 password: ''
             })

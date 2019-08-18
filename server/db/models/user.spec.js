@@ -11,7 +11,7 @@ describe('User model', () => {
     let cody;
     before(async () => {
         cody = await User.create({
-            name: 'Cody',
+            username: 'Cody',
             email: 'cody@test.com',
             password: 'test'
         })
@@ -19,15 +19,15 @@ describe('User model', () => {
 
     describe('Schema', () => {
         it('requires a "name" to a string', async () => {
-            expect(cody.name).to.be.a('string')
+            expect(cody.username).to.be.a('string')
         });
 
         it('"name" should be required', async () =>  {
-            expect(!!cody.name).to.be.true
+            expect(!!cody.username).to.be.true
         })
 
         it('requires a "email" to a string', async () => {
-            expect(cody.name).to.be.a('string')
+            expect(cody.username).to.be.a('string')
         });
 
         it('"email" should be required', async () => {
@@ -35,7 +35,7 @@ describe('User model', () => {
         })
 
         it('requires a "password" to a string', async () => {
-            expect(cody.name).to.be.a('string')
+            expect(cody.username).to.be.a('string')
         });
 
         it('"password" should be required', async () =>  {

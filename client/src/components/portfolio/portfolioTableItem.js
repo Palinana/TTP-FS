@@ -6,7 +6,7 @@ const PortfolioTableItem = ({ stock }) => {
             <td className="text-center">{stock.ticker.toUpperCase()}</td>
             <td className="stock__shares text-center">{stock.quantity} {stock.quantity > 1 ? 'shares' : 'share'}</td>
             <td className="text-center">
-                <span></span>
+                <span className={stock.change}>{stock.latestPrice}</span>
             </td>
         </tr>
     );

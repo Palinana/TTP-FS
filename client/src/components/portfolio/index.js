@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
-import { fetchStocks, purchaseStock, fetchError, fetchSuccess } from "../../store";
+import { fetchStocks, purchaseStock, fetchMessage } from "../../store";
 
 import UserPanel from './userPanel';
 import Portfolio from './portfolio';
@@ -20,8 +20,7 @@ class PortfolioDashboard extends Component {
     componentDidMount() {
         const { userId } = this.props;
         this.props.getStocks(userId);
-        this.props.getError("");
-        this.props.getSuccess("");
+        this.props.getMessage("", "")
     }
 
     handleChange = e => this.setState({ [e.target.name]: e.target.value });
@@ -42,7 +41,7 @@ class PortfolioDashboard extends Component {
     }
 
     render() {
-        const { user, stocks, error, success } = this.props;
+        const { user, stocks, message } = this.props;
         stocks.sort((a, b) => a.ticker !== b.ticker ? a.ticker < b.ticker ? -1 : 1 : 0);
 
         if(stocks){
@@ -62,8 +61,7 @@ class PortfolioDashboard extends Component {
                                 onChange={this.handleChange}
                                 tickerValue={this.state.ticker}
                                 quantityValue={this.state.quantity}                            
-                                error={error}
-                                success={success}
+                                message={message}
                             />
                         </div>
                     </div>
@@ -82,8 +80,7 @@ const mapState = (state,ownProps) => {
       stocks: state.portfolio.stocks,
       userId: state.user.id,
       user: state.user,
-      error: state.error.errorMessage,
-      success: state.success.successMessage,
+      message: state.message,
     };
 };
 
@@ -92,8 +89,7 @@ const mapDispatch = dispatch => ({
     buyStock: (ticker, quantity, id) => {
         dispatch(purchaseStock(ticker, quantity, id))
     },
-    getError: (data) => dispatch(fetchError(data)),
-    getSuccess: (data) => dispatch(fetchSuccess(data))
+    getMessage: (data,color) => dispatch(fetchMessage(data, color))
 });
 
 export default connect(mapState, mapDispatch)(PortfolioDashboard);

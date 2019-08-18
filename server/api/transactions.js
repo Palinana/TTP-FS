@@ -2,6 +2,23 @@ const router = require('express').Router();
 const { Transaction, User } = require('../db/models');
 const { getSymbolQuote } = require('../iex');
 
+// Get a user's transactions
+router.get('/:ticker', async (req, res, next) => {
+    try {
+        if (req.user) {
+            // Getting the current ticker price 
+            const tickerData  = await getSymbolQuote(req.params.ticker);
+            res.json(tickerData);
+        } 
+        else {
+            res.send('You must be signed in to see transactions');
+        }
+    } 
+    catch (error) {
+        next(error);
+    }
+});
+
 // Make a new stock transaction
 router.post('/', async (req, res, next) => {
     try {

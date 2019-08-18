@@ -13,8 +13,26 @@ const getStocks = stocks => ({
 
 export const fetchStocks = userId => async dispatch => {
     try {
-        const { data } = await axios.get(`api/users/${userId}/portfolio`)
-        dispatch(getStocks(data))
+        const { data } = await axios.get(`api/users/${userId}/portfolio`);
+        let userPortfolioStocks = [];
+        userPortfolioStocks = await Promise.all(
+            data.map(async stock => {
+                const { data } = await axios.get(`/api/transactions/${stock.ticker}`);
+
+                let change;
+                if(data.open < data.latestPrice) change = "stock-up"
+                if(data.open > data.latestPrice) change = "stock-down"
+                if(data.open === data.latestPrice) change = "stock-same"
+
+                return {
+                    ticker: stock.ticker,
+                    quantity: stock.quantity,
+                    latestPrice: data.latestPrice,
+                    change
+                };
+          })
+        );
+        dispatch(getStocks(userPortfolioStocks))
     } catch (error) {
         console.error(error)
     }

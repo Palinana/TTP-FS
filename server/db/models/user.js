@@ -14,7 +14,7 @@ const User = db.define('user', {
             return () => this.getDataValue('password');
         },
     },
-    name: {
+    username: {
         type: Sequelize.STRING,
         allowNull: false,
         validate: {

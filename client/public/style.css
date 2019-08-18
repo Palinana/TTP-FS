@@ -174,7 +174,7 @@ a:hover {
 }
 
 .portfolio__money {
-    font-weight: 300;
+    font-weight: 100;
     font-size: 25px;
 }
 
@@ -208,6 +208,27 @@ td span {
     background: #edfbef;
     border-radius: 5px;
     padding: 15px;
+}
+
+.stock-up {
+    background: #ecfbf4;
+    color: #72d8ac;
+    border-radius: 5px;
+    padding: 5px 20px;
+}
+
+.stock-down {
+    background: #fbecec;
+    color: #e43c3c;
+    border-radius: 5px;
+    padding: 5px 20px;
+}
+
+.stock-same {
+    background: #f5f7f6;
+    color: #afafaf;
+    border-radius: 5px;
+    padding: 5px 20px;
 }
 
 

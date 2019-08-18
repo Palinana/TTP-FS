@@ -5,10 +5,9 @@ import {composeWithDevTools} from 'redux-devtools-extension';
 import user from './user';
 import portfolio from './portfolio';
 import transactions from './transactions';
-import error from './error';
-import success from './success'
+import message from './message'
 
-const reducer = combineReducers({ user, portfolio, transactions, error, success });
+const reducer = combineReducers({ user, portfolio, transactions, message });
 const middleware = composeWithDevTools(
   applyMiddleware(thunkMiddleware, createLogger({ collapsed: true }))
 )
@@ -18,5 +17,4 @@ export default store;
 export * from './user';
 export * from './portfolio';
 export * from './transactions';
-export * from './error';
-export * from './success';
+export * from './message';

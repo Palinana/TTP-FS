@@ -1,6 +1,6 @@
 import React from 'react';
 
-const PurchaseStock = ({ handleSubmit, onChange, tickerValue, quantityValue, error, success }) => {
+const PurchaseStock = ({ handleSubmit, onChange, tickerValue, quantityValue, message }) => {
     // const last = null;
     return (
         <div className="row">
@@ -32,9 +32,9 @@ const PurchaseStock = ({ handleSubmit, onChange, tickerValue, quantityValue, err
                             value={quantityValue}
                             onChange={onChange}
                         />
-                    </div>  
-                    {error && <div className="form-error"> {error} </div>}
-                    {success && <div className="form-success"> {success} </div>}
+                    </div> 
+
+                    {message && <div className={message.color}> {message.message} </div>}
 
                     <div>
                         <button type="submit" className="btn btn-lg btn-primary btn-block font-weight-light">Purchase</button>

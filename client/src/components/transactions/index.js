@@ -29,30 +29,34 @@ class Transactions extends Component {
                     <div className="col-12 mt-5 mb-5">
                         <span className="transactions__title">Transactions</span>
                     </div>
-
-                    <div className="col-12 mt-3">
-                        <table className="table">
-                            <thead className="transactions__table-heading thead-inverse">
-                                <tr>
-                                    <th className="text-center">Type</th>
-                                    <th className="text-center">Symbol</th>
-                                    <th className="text-center">Quantity</th>
-                                    <th className="text-center">Unit Price</th>
-                                    <th className="text-center">Total</th>
-                                    <th className="text-center">Purchase Date</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                { transactions && transactions.map((transaction, idx) => (
-                                    <TransactionTableItem  
-                                        transaction={transaction} 
-                                        purchaseDate={this.purchaseDate(transaction.date)}
-                                        key={idx}
-                                    />
-                                ))}
-                            </tbody>
-                        </table>
-                    </div>
+                    
+                    { transactions.length ? 
+                        <div className="col-12 mt-3">
+                            <table className="table">
+                                <thead className="transactions__table-heading thead-inverse">
+                                    <tr>
+                                        <th className="text-center">Type</th>
+                                        <th className="text-center">Symbol</th>
+                                        <th className="text-center">Quantity</th>
+                                        <th className="text-center">Unit Price</th>
+                                        <th className="text-center">Total</th>
+                                        <th className="text-center">Purchase Date</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    { transactions && transactions.map((transaction, idx) => (
+                                        <TransactionTableItem  
+                                            transaction={transaction} 
+                                            purchaseDate={this.purchaseDate(transaction.date)}
+                                            key={idx}
+                                        />
+                                    ))}
+                                </tbody>
+                            </table>
+                        </div> 
+                    : 
+                    <div className="col-12 text-center transactions__empty">You don't have any transactions</div>
+                    }     
                 </div>
             </div>
         )

@@ -8,34 +8,46 @@ import logo from '../../icons/logo.png';
 import { logout } from '../../store';
 
 class Navbar extends Component {
+    state = {
+        navCollapsed: true
+    }
+    
+    onToggleNav = () => {
+        this.setState({ navCollapsed: !this.state.navCollapsed })
+    }
+      
     render() {
         const { handleClick, isLoggedIn } = this.props;
-        return (
-            <nav className="navbar navbar-expand-md navbar-fixed mb-4">
-                {isLoggedIn ? (
-                    <div className="container-fluid">
-                        <Link to="/portfolio" className="navbar-brand">
-                            <img className="nav-logo" src={logo}/>
-                        </Link>
-                        <ul className="nav navbar-nav">
+        const { navCollapsed } = this.state;
+
+        if (isLoggedIn) {
+            return (
+                <nav className="navbar navbar-expand-lg navbar-light">
+                    <Link to="/portfolio" className="navbar-brand">
+                        <img className="nav-logo" alt="Stock app logo icon" src={logo}/>
+                    </Link>
+
+                    <button className="navbar-toggler" onClick={this.onToggleNav} type="button" data-toggle="collapse" >
+                        <span className="navbar-toggler-icon"></span>
+                    </button>
+
+                    <div className={(navCollapsed ? 'collapse' : '') + ' navbar-collapse justify-content-end'}>
+                        <ul className="navbar-nav text-right">
                             <li className="nav-item">
                                 <Link to="/portfolio" className="nav-link">Portfolio</Link>
                             </li>
                             <li className="nav-item">
                                 <Link to="/transactions" className="nav-link">Transactions</Link>
                             </li>
-                            <li className="nav-item">
-                                <Link to="#" className="nav-link" onClick={handleClick}>
-                                    <img className="nav-exit" src={exit}/>
-                                </Link>
-                            </li>
+                            <Link to="#" className="nav-link" onClick={handleClick}>
+                                <img className="nav-exit" alt="Stock app exit icon" src={exit}/>
+                            </Link>
                         </ul>
-                    </div>
-                ) : (
-                    null
-                )}
-            </nav>
-        )   
+                    </div>    
+                </nav> 
+            ) 
+        }
+        else return null
     }
 }
 

@@ -46,8 +46,8 @@ class PortfolioDashboard extends Component {
 
         if(stocks){
             return (
-                <div className="container">
-                    <div className="row">
+                <div className="container mt-4">
+                    <div className="row mb-5">
                         <div className="col-12 mt-5 mb-5 mb-md-0">
                             <UserPanel user={user} weekDay={this.getDate().weekDay} date={this.getDate().date}/>
                         </div>

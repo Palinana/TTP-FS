@@ -1,7 +1,6 @@
 import React from 'react';
 
 const PurchaseStock = ({ handleSubmit, onChange, tickerValue, quantityValue, message }) => {
-    // const last = null;
     return (
         <div className="row">
             <div className="col-md-12 mb-5">
@@ -46,4 +45,3 @@ const PurchaseStock = ({ handleSubmit, onChange, tickerValue, quantityValue, mes
 }
 
 export default PurchaseStock;
-

@@ -1,13 +1,13 @@
-import axios from 'axios'
-import history from '../history'
+import axios from 'axios';
+import history from '../history';
 
-const GET_USER = 'GET_USER'
-const REMOVE_USER = 'REMOVE_USER'
+const GET_USER = 'GET_USER';
+const REMOVE_USER = 'REMOVE_USER';
 
-const defaultUser = {}
+const defaultUser = {};
 
-const getUser = user => ({type: GET_USER, user})
-const removeUser = () => ({type: REMOVE_USER})
+const getUser = user => ({type: GET_USER, user});
+const removeUser = () => ({type: REMOVE_USER});
 
 export const me = () => async dispatch => {
   try {

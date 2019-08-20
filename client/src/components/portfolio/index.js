@@ -75,7 +75,6 @@ class PortfolioDashboard extends Component {
 };
   
 const mapState = (state,ownProps) => {
-    console.log('state ', state)
     return {
       stocks: state.portfolio.stocks,
       userId: state.user.id,

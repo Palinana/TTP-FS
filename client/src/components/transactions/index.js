@@ -14,11 +14,9 @@ class Transactions extends Component {
 
     // changing the date format that comes from the DB
     purchaseDate = (date) => {
-        console.log(date)
         const month = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
         let weekmonth = month[new Date().getMonth()];
 
-        console.log(`${weekmonth} ${ Number(date.slice(8)[0]) === 0 ? date.slice(9) : date.slice(8) }, ${date.slice(0,4)}`)
         return `${weekmonth} ${ Number(date.slice(8)[0]) === 0 ? date.slice(9) : date.slice(8) }, ${date.slice(0,4)}`;
     }
 

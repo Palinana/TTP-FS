@@ -10,7 +10,7 @@ const UserPanel = ({ user, weekDay, date }) => {
                 </div>
 
                 <div className="text-right">
-                    <div className="user-panel__username">{user.name}</div>
+                    <div className="user-panel__username">{user.username}</div>
                     <div className="user-panel__balance-title">Available Balance</div>
                     <h1 className="user-panel__balance">${Math.floor(user.balance).toFixed(2)}</h1>
                 </div>
